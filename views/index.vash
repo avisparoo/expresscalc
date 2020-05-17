@@ -1,0 +1,44 @@
+@html.extend('layout', function(model) {
+  @html.block('content', function(model) {
+    <h1>@model.title</h1>
+      <label for="a">Enter value a:</label>
+      <input type="text" id="a" name="a"><br><br>
+      <label for="b">Enter value b:</label>
+      <input type="text" id="b" name="b"><br><br>
+      <input type="button" value="Add" onclick="javascript:login('+');">
+      <input type="button" value="Sub" onclick="javascript:login('-');">
+      <input type="button" value="Mul" onclick="javascript:login('*');">
+      <input type="button" value="Div" onclick="javascript:login('/');">
+      <div id="ans"></div>
+
+
+    <script>
+
+      function login(op) {
+      var body = {}
+      if($.trim($('#a').val()) != "")
+      body.a = Number($('#a').val())
+      
+      if($.trim($('#b').val()) != "")
+      body.b = Number($('#b').val())
+
+      body.operator = op
+
+  $.ajax({
+    url: '/cal',
+    type: 'POST',
+    data: JSON.stringify(body),
+    contentType: 'application/json',
+    success: function(data, text, xhr) {
+      $('#ans').html(data.result)
+    },
+    error: function(xhr, text, err) {
+      $('#ans').html(xhr.responseJSON.error)
+    }
+    })
+    }
+    </script>
+  })
+})
+
+
