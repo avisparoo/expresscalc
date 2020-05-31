@@ -24,19 +24,19 @@
 
       body.operator = op
 
-  $.ajax({
-    url: '/cal',
-    type: 'POST',
-    data: JSON.stringify(body),
-    contentType: 'application/json',
-    success: function(data, text, xhr) {
-      $('#ans').html(data.result)
-    },
-    error: function(xhr, text, err) {
-      $('#ans').html(xhr.responseJSON.error)
-    }
-    })
-    }
+      $.ajax({
+        url: '/cal',
+        type: 'POST',
+        data: JSON.stringify(body),
+        contentType: 'application/json',
+        success: function(data, text, xhr) {
+          $('#ans').html(data.result)
+        },
+        error: function(xhr, text, err) {
+          $('#ans').html(xhr.responseJSON.error)
+        }
+        })
+      }
     </script>
   })
 })
